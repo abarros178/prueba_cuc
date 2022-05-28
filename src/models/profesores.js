@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const profesoresSchema = mongoose.Schema({
+const profesoresSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true
@@ -14,7 +14,7 @@ const profesoresSchema = mongoose.Schema({
         required: true
     },
     telefono: {
-        type: Number,
+        type: String,
         required: true
     }
 

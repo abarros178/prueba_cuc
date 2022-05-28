@@ -4,13 +4,13 @@ Content-Type: application/json
 
 {
 "nombre": 
-        "lukka"
+        "lukkfdfda"
     ,
     "apellido": 
-        "Pertuz"
+        "Pedfdfrtuz"
     , 
     "numIdentificacion": 
-        "333333"
+        "33623333"
     ,
     "correo": 
         "lpertuz@cuc.edu.co"
@@ -20,13 +20,43 @@ Content-Type: application/json
 
 }
 ###
+POST http://localhost:8000/api/subjects HTTP/1.1
+Content-Type: application/json
+
+{
+"nombre": 
+        "Desarrollo web"
+    ,
+    "salon": 
+        "11203"
+    , 
+    "horario": 
+        "Martes 3:00pm"
+    ,
+    "id_profesor": 
+        "6292877c2b22f5aa06411453"
+
+}
+###
+POST http://localhost:8000/api/classes HTTP/1.1
+Content-Type: application/json
+
+{
+"id_estudiante": 
+        "62905b79a410736633f4c066"
+    ,
+    "id_asignatura": 
+        "62928fb0e50ec2658d08d084"
+    
+}
+###
 GET http://localhost:8000/api/students HTTP/1.1
 
 ###
-GET http://localhost:8000/api/students/62905d7a5e4364c5efce8353 HTTP/1.1
+GET http://localhost:8000/api/students/62905b79a410736633f4c066 HTTP/1.1
 
 ###
-PUT http://localhost:8000/api/students/62905d7a5e4364c5efce8353 HTTP/1.1
+PUT http://localhost:8000/api/students/62905b79a410736633f4c066 HTTP/1.1
 Content-Type: application/json
 
 {
