@@ -10,7 +10,7 @@ const estudianteSchema = new mongoose.Schema({
         required: true
     }, 
     numIdentificacion: {
-        type: Number,
+        type: String,
         required: true
     },
     correo: {
