@@ -8,11 +8,11 @@ const Modelo = () => {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Modal title</h5>
+                        <h5 className="modal-title">Editar estudiantes</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <p>Modal body text goes here.</p>
+                        <p>Aqui puedes editar el estudiante</p>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -53,7 +53,7 @@ export const Formulario_estudiante = () => {
     useEffect(() => {
         Axios.get('http://localhost:8000/api/students').then((response) => {
 
-           // console.log(response.data)
+            // console.log(response.data)
             setListaEstudiantes(response.data)
         })
 
@@ -80,7 +80,7 @@ export const Formulario_estudiante = () => {
         e.preventDefault()
 
 
-       // console.log(datosForm);
+        // console.log(datosForm);
         const { nombre, apellido, numIdentificacion, correo, programaAcademico } = e.target
         if (!nombre.value.trim()) {
             alert("Digite los nombres");
@@ -121,15 +121,15 @@ export const Formulario_estudiante = () => {
         });
     }
 
-    const cambiarestudiante = (e,id) => {
-        console.log('id',id)
+    const cambiarestudiante = (e, id) => {
+        console.log('id', id)
 
         e.preventDefault()
 
 
         const { nombre, apellido, numIdentificacion, correo, programaAcademico } = e.target
         console.log(nombre.value)
-        
+
         if (!nombre.value.trim()) {
             alert("Digite los nombres");
             return;
@@ -159,7 +159,7 @@ export const Formulario_estudiante = () => {
         setForm(respuesta)
         console.log(form)
         setControlador(true)
-
+        handleModal()
 
         setDatosForm({
             nombre: "",
@@ -173,22 +173,22 @@ export const Formulario_estudiante = () => {
       setApellido("");
       setCorreo("");
       setProgramaAcademico("");*/
-      const todos=(item)=>{
-          editar(item)
-          handleModal()
-      }
-      const editar = (item) => {
-        
-            setNombre(item.nombre);
-            setApellido(item.apellido);
-            setNumidentificacion(item.numIdentificacion);
-            setCorreo(item.correo);
-            setProgramaAcademico(item.programaAcademico);
-            setidmongo(item._id);
-            console.log('idmongo',idmongo)            
-         
-        
-      };
+    const todos = (item) => {
+        editar(item)
+        handleModal()
+    }
+    const editar = (item) => {
+
+        setNombre(item.nombre);
+        setApellido(item.apellido);
+        setNumidentificacion(item.numIdentificacion);
+        setCorreo(item.correo);
+        setProgramaAcademico(item.programaAcademico);
+        setidmongo(item._id);
+        console.log('idmongo', idmongo)
+
+
+    };
 
     return (
         <>
@@ -322,84 +322,84 @@ export const Formulario_estudiante = () => {
 
             {
 
-                modal && (listaestudiantes.map(estudiante=>(
-                    
-                    <div key={estudiante._id}className="modal" tabIndex="-1" style={{ display: 'block' }}>
-                        
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Modal title</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleModal}></button>
+                modal && (listaestudiantes.map(estudiante => (
+
+                    <div key={estudiante._id} className="modal" tabIndex="-1" style={{ display: 'block' }}>
+
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Editar estudiante</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleModal}></button>
+                                </div>
+                                <div className="modal-body">
+                                    <p>Aqui puedes editar cualquier estudiante</p>
+                                </div>
+                                <form onSubmit={(e) => cambiarestudiante(e, idmongo)} >
+                                    <h6 className="card-subtitle mb-2 text-muted">
+                                        Nombre del estudiante
+                                    </h6>
+                                    <input
+
+                                        className="form-control mb-2 "
+                                        type="text"
+                                        name='nombre'
+                                        placeholder="Ingrese nombre"
+                                        defaultValue={nombre}
+                                    />
+                                    <h6 className="card-subtitle mb-2 text-muted">
+                                        Apellido del estudiante
+                                    </h6>
+                                    <input
+
+                                        className="form-control mb-2 "
+                                        type="text"
+                                        placeholder="Ingrese apellido"
+                                        name='apellido'
+                                        defaultValue={apellido}
+                                    />
+                                    <h6 className="card-subtitle mb-2 text-muted">
+                                        Numero de id del estudiante
+                                    </h6>
+                                    <input
+                                        className="form-control mb-2 "
+                                        type="text"
+                                        placeholder="Ingrese identificacion"
+                                        name='numIdentificacion'
+                                        defaultValue={numIdentificacion}
+                                    />
+                                    <h6 className="card-subtitle mb-2 text-muted">
+                                        correo del estudiante
+                                    </h6>
+                                    <input
+                                        className="form-control mb-2 "
+                                        type="text"
+                                        placeholder="Ingrese correo"
+                                        name='correo'
+                                        defaultValue={correo}
+                                    />
+                                    <h6 className="card-subtitle mb-2 text-muted">
+                                        Programa academico del estudiante
+                                    </h6>
+                                    <input
+                                        className="form-control mb-2 "
+                                        type="text"
+                                        placeholder="Ingrese programa academico"
+                                        name='programaAcademico'
+                                        defaultValue={programaAcademico}
+                                    />
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleModal}>Close</button>
+                                        <button type="submit" className="btn btn-primary" >Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div className="modal-body">
-                            <p>Modal body text goes here.</p>
-                        </div>
-                        <form onSubmit={(e)=>cambiarestudiante(e,idmongo)} >
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                Nombre del estudiante
-                            </h6>
-                            <input
-                                
-                                className="form-control mb-2 "
-                                type="text"
-                                name='nombre'
-                                placeholder="Ingrese nombre"
-                                defaultValue={nombre}
-                            />
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                Apellido del estudiante
-                            </h6>
-                            <input
-                                
-                                className="form-control mb-2 "
-                                type="text"
-                                placeholder="Ingrese apellido"
-                                name='apellido'
-                                defaultValue={apellido}
-                            />
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                Numero de id del estudiante
-                            </h6>
-                            <input
-                                className="form-control mb-2 "
-                                type="text"
-                                placeholder="Ingrese identificacion"
-                                name='numIdentificacion'
-                                defaultValue={numIdentificacion}
-                            />
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                correo del estudiante
-                            </h6>
-                            <input
-                                className="form-control mb-2 "
-                                type="text"
-                                placeholder="Ingrese correo"
-                                name='correo'
-                                defaultValue={correo}
-                            />
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                Programa academico del estudiante
-                            </h6>
-                            <input
-                                className="form-control mb-2 "
-                                type="text"
-                                placeholder="Ingrese programa academico"
-                                name='programaAcademico'
-                                defaultValue={programaAcademico}
-                            />
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"onClick={handleModal}>Close</button>
-                            <button type="submit" className="btn btn-primary" >Save changes</button>
-                        </div>
-                        </form>
                     </div>
-                </div>
-            </div>
                 ))
-                
-    )
-                }
+
+                )
+            }
 
 
 

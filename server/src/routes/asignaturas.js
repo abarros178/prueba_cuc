@@ -29,7 +29,8 @@ router.get("/subjects/:id", (req, res) => {
 router.put("/subjects/:id", (req, res) => {
     const { params: { id } } = req;
     const {nombre,salon,horario,id_profesor} = req.body;
-    asignaturasSchema.updateOne({ _id: id }, { $set: { nombre, apellido, numIdentificacion, correo, programaAcademico } }).then((data) => res.json(data)).catch((error) => res.json({
+    console.log(id)
+    asignaturasSchema.updateOne({ _id: id }, { $set: { nombre, salon, horario, id_profesor} }).then((data) => res.json(data)).catch((error) => res.json({
         messague: error
     }))
 })

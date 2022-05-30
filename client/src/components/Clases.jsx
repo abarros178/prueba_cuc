@@ -34,6 +34,10 @@ export const Clases = () => {
 
 
         setController(true)
+        setDatosForm({
+            id_estudiante: '0',
+            id_asignatura: '0'
+        })
     }
 
     const loadAsignatura = async () => {
