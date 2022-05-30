@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
-import axios from 'axios';
+
+
 
 const Formulario = () => {
 
@@ -13,19 +14,48 @@ const Formulario = () => {
     const [listaestudiantes, setListaEstudiantes] = useState();
 
     useEffect(() => {
-        Axios.get('http://localhost:8000/api/students').then((response) => { 
-            
+        Axios.get('http://localhost:8000/api/students').then((response) => {
+
             console.log(response.data)
             setListaEstudiantes(response.data)
-         })
+        })
 
-    }, [])
+    }, [form])
+
+    const eliminar = (id) => {
+        try {
+            Axios.delete(`http://localhost:8000/api/students/${id}`)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     const addestudiante = (e) => {
 
         e.preventDefault()
 
+
+
         const { nombre, apellido, identificacion, correo, programaAcademico } = e.target
+        if (!nombre.value.trim()) {
+            alert("Digite los nombres");
+            return;
+        } else if (!apellido.value.trim()) {
+            alert("Digite el apellido");
+            return;
+        }
+        if (!identificacion.value < 0) {
+            alert("La identificacion no pueden ser negativo");
+            return;
+        } else if (!correo.value.trim()) {
+            alert("Digite el correo");
+            return;
+        }
+        if (!programaAcademico.value.trim()) {
+            alert("Digite el programa academico");
+            return;
+        }
         const respuesta = Axios.post('http://localhost:8000/api/students', {
             nombre: nombre.value,
             apellido: apellido.value,
@@ -36,11 +66,18 @@ const Formulario = () => {
         console.log(respuesta)
         setForm(respuesta)
 
+
+
     }
+    /*setNombre("");
+      setApellido("");
+      setCorreo("");
+      setProgramaAcademico("");*/
 
 
     return (
         <React.StrictMode>
+            
             <div className="container mt-4">
                 <div>
                     <h1 className="text-center font-italic">
@@ -130,7 +167,7 @@ const Formulario = () => {
                                                 <td>{item.programaAcademico}</td>
                                                 <td>
                                                     <button
-                                                        className="btn btn-danger btn-sm float-end mx-2"
+                                                        className="btn btn-danger btn-sm float-end mx-2" onClick={() => eliminar(item._id)}
                                                     >
                                                         Eliminar
                                                     </button>
@@ -156,8 +193,7 @@ const Formulario = () => {
 
 
 
-
-
+           
 
         </React.StrictMode >
     )
