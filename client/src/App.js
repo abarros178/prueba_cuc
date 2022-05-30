@@ -1,5 +1,5 @@
 import './App.css';
-import { Inicio } from './components/Inicio';
+
 import { AppRouterr } from './routes/AppRouterr';
 
 

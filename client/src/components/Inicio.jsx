@@ -1,6 +1,8 @@
 import React from 'react'
 import NavBar from './navbar/navBar.jsx'
 import img from '../assets/estudiante.jpg'
+import img1 from '../assets/profesores.jpg'
+
 export const Inicio = () => {
   return (
     <>
@@ -28,9 +30,9 @@ export const Inicio = () => {
                 <h5 className="card-title">Consulta de datos</h5>
                 <p className="card-text">Aqui podra hacer consultas de monitorias ya asignadas y de los monitores registrados hasta el momento</p>
                 <div className="col-sm-15 mb-4 d-flex justify-content-center" >
-                  <img className="img-thumbnail" src={img} alt="Teclado" style={{width:'30rem',height:'20rem'}}/>
+                  <img className="img-thumbnail" src={img1} alt="Teclado" style={{width:'30rem',height:'20rem'}}/>
                 </div>
-                <a href="/consultas" className="btn btn-primary">Consultar</a>
+                <a href="/api/teachers" className="btn btn-primary">Consultar</a>
               </div>
             </div>
           </div>

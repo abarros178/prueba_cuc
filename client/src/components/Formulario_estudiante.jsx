@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
-
+import NavBar from './navbar/navBar.jsx'
 export const Formulario_estudiante = () => {
     const [datosForm, setDatosForm] = React.useState({
         nombre: "",
@@ -78,6 +78,7 @@ export const Formulario_estudiante = () => {
         })
         console.log(respuesta)
         setForm(respuesta)
+        setControlador(true)
 
         
         setDatosForm({
@@ -96,7 +97,7 @@ export const Formulario_estudiante = () => {
 
     return (
         <React.StrictMode>
-
+            <NavBar/>
             <div className="container mt-4">
                 <div>
                     <h1 className="text-center font-italic">

@@ -5,7 +5,7 @@ export const NavBar = () => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div id='header' className="container-fluid">
                 <a className="navbar-brand" href="/">
-                    MonitoriasUniversity
+                    Universidad de la Costa
                 </a>
                 {/* <button
                     id="boton"
@@ -27,13 +27,13 @@ export const NavBar = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" href="/registro">
-                                Registro
+                            <a className="nav-link active" href="/api/students">
+                                Registro estudiantes
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" href="/consultas">
-                                Consultas
+                            <a className="nav-link active" href="/api/teachers">
+                                Lista profesores
                             </a>
                         </li>
 
