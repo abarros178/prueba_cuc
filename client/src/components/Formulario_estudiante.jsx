@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 
-
-
-const Formulario = () => {
-
+export const Formulario_estudiante = () => {
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [numIdentificacion, setNumidentificacion] = useState(0);
@@ -199,5 +196,3 @@ const Formulario = () => {
     )
 
 }
-
-export default Formulario;
