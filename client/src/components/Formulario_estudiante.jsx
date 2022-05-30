@@ -61,10 +61,22 @@ export const Formulario_estudiante = () => {
 
     }, [controlador])
 
+  
 
+    const eliminar = async(id) => {
 
-    const eliminar = (id) => {
+       
         try {
+            
+
+            const response = await fetch('http://localhost:8000/api/classes');
+            const data = await response.json();
+            console.log(data)
+            const existe=data.find(item=>item.id_estudiante===id)
+            if(existe){
+                alert('No se puede eliminar un estudiante asignado a una clase')
+                return
+            }
             Axios.delete(`http://localhost:8000/api/students/${id}`)
             setControlador(true)
         } catch (error) {
@@ -72,6 +84,9 @@ export const Formulario_estudiante = () => {
         }
     };
 
+
+
+  
     const handleModal = () => { setModal(!modal) }
 
 

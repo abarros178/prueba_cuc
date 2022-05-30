@@ -162,6 +162,16 @@ export const Asignaturas = () => {
 
     const eliminarAsignatura = async (id) => {
         try {
+
+            const response = await fetch('http://localhost:8000/api/classes');
+            const data = await response.json();
+            console.log(data)
+            const existe=data.find(item=>item.id_asignatura===id)
+            if(existe){
+                alert('No se puede eliminar una asignatura asignada a una clase')
+                return
+            }
+
             await fetch(`http://localhost:8000/api/subjects/${id}`, {
                 method: 'DELETE'
             })
