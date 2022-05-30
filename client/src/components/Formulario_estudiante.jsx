@@ -2,6 +2,17 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 
 export const Formulario_estudiante = () => {
+    const [datosForm, setDatosForm] = React.useState({
+        nombre: "",
+        apellido: "",
+        numIdentificacion: 0,
+        correo: '',
+        programaAcademico: ""
+    });
+
+    const handleChange = (e) => {
+        setDatosForm({ ...datosForm, [e.target.name]: e.target.value });
+    };
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [numIdentificacion, setNumidentificacion] = useState(0);
@@ -38,8 +49,8 @@ export const Formulario_estudiante = () => {
         e.preventDefault()
 
 
-
-        const { nombre, apellido, identificacion, correo, programaAcademico } = e.target
+        console.log(datosForm);
+        const { nombre, apellido, numIdentificacion, correo, programaAcademico } = e.target
         if (!nombre.value.trim()) {
             alert("Digite los nombres");
             return;
@@ -47,7 +58,7 @@ export const Formulario_estudiante = () => {
             alert("Digite el apellido");
             return;
         }
-        if (!identificacion.value < 0) {
+        if (!numIdentificacion.value < 0) {
             alert("La identificacion no pueden ser negativo");
             return;
         } else if (!correo.value.trim()) {
@@ -61,15 +72,21 @@ export const Formulario_estudiante = () => {
         const respuesta = Axios.post('http://localhost:8000/api/students', {
             nombre: nombre.value,
             apellido: apellido.value,
-            numIdentificacion: identificacion.value,
+            numIdentificacion: numIdentificacion.value,
             correo: correo.value,
             programaAcademico: programaAcademico.value
         })
         console.log(respuesta)
         setForm(respuesta)
 
-
-
+        
+        setDatosForm({
+            nombre: "",
+            apellido: "",
+            numIdentificacion: 0,
+            correo: '',
+            programaAcademico: ""
+        });
     }
     /*setNombre("");
       setApellido("");
@@ -79,7 +96,7 @@ export const Formulario_estudiante = () => {
 
     return (
         <React.StrictMode>
-            
+
             <div className="container mt-4">
                 <div>
                     <h1 className="text-center font-italic">
@@ -94,51 +111,56 @@ export const Formulario_estudiante = () => {
                                 Nombre del estudiante
                             </h6>
                             <input
+                                onChange={handleChange}
                                 className="form-control mb-2 "
                                 type="String"
                                 name='nombre'
                                 placeholder="Ingrese nombre"
-                                defaultValue={nombre}
+                                value={datosForm.nombre}
                             />
                             <h6 className="card-subtitle mb-2 text-muted">
                                 Apellido del estudiante
                             </h6>
                             <input
+                                onChange={handleChange}
                                 className="form-control mb-2 "
                                 type="String"
                                 placeholder="Ingrese apellido"
                                 name='apellido'
-                                defaultValue={apellido}
+                                value={datosForm.apellido}
                             />
                             <h6 className="card-subtitle mb-2 text-muted">
                                 Numero de id del estudiante
                             </h6>
                             <input
+                                onChange={handleChange}
                                 className="form-control mb-2 "
                                 type="String"
                                 placeholder="Ingrese identificacion"
-                                name='identificacion'
-                                defaultValue={numIdentificacion}
+                                name='numIdentificacion'
+                                value={datosForm.numIdentificacion}
                             />
                             <h6 className="card-subtitle mb-2 text-muted">
                                 correo del estudiante
                             </h6>
                             <input
+                                onChange={handleChange}
                                 className="form-control mb-2 "
                                 type="String"
                                 placeholder="Ingrese correo"
                                 name='correo'
-                                defaultValue={correo}
+                                value={datosForm.correo}
                             />
                             <h6 className="card-subtitle mb-2 text-muted">
                                 Programa academico del estudiante
                             </h6>
                             <input
+                                onChange={handleChange}
                                 className="form-control mb-2 "
                                 type="String"
                                 placeholder="Ingrese programa academico"
                                 name='programaAcademico'
-                                defaultValue={programaAcademico}
+                                value={datosForm.programaAcademico}
                             />
                             <button className="btn btn-primary btn-block" type='submit'>
                                 Agregar
@@ -195,7 +217,7 @@ export const Formulario_estudiante = () => {
 
 
 
-           
+
 
         </React.StrictMode >
     )
