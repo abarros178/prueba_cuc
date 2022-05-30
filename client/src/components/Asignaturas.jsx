@@ -26,6 +26,7 @@ export const Asignaturas = () => {
 
     const handleChange = (e) => {
         setDatosForm({ ...datosForm, [e.target.name]: e.target.value });
+     
     };
 
     const devolverProfesor = (id) => {
@@ -58,9 +59,10 @@ export const Asignaturas = () => {
             body: JSON.stringify(datosForm),
             headers: { "Content-Type": 'application/json' }
         });
-
+        
 
         setController(true)
+        
     }
 
 
@@ -95,7 +97,7 @@ export const Asignaturas = () => {
         loadAsignatura()
         setController(false)
     }, [controller])
-
+    
 
     return (
         <div>
@@ -127,7 +129,7 @@ export const Asignaturas = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 name='nombre'
                                 placeholder="Ingrese nombre"
                                 value={datosForm.nombre}
@@ -138,7 +140,7 @@ export const Asignaturas = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 placeholder="Ingrese apellido"
                                 name='salon'
                                 value={datosForm.salon}
@@ -149,7 +151,7 @@ export const Asignaturas = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 placeholder="Ingrese identificacion"
                                 name='horario'
                                 value={datosForm.horario}

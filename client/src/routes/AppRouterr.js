@@ -13,10 +13,10 @@ export const AppRouterr = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<Inicio />}></Route>
-                    <Route path='/api/students' element={<Formulario_estudiante/>}></Route>
-                    <Route path='/api/teachers' element={<Listaprofesores/>}></Route>
-                    <Route path='/api/subjects' element={<Asignaturas/>}></Route>
-                    <Route path='/api/classes' element={<Clases/>}></Route>
+                    <Route path='/students' element={<Formulario_estudiante/>}></Route>
+                    <Route path='/teachers' element={<Listaprofesores/>}></Route>
+                    <Route path='/subjects' element={<Asignaturas/>}></Route>
+                    <Route path='/classes' element={<Clases/>}></Route>
 
                 </Routes>
             </BrowserRouter>

@@ -1,6 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 import NavBar from './navbar/navBar.jsx'
+
+const Modelo = () => {
+    return (
+        <div className="modal" tabIndex="-1" style={{ display: 'block' }}>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Modal title</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    )
+}
+
 export const Formulario_estudiante = () => {
     const [datosForm, setDatosForm] = React.useState({
         nombre: "",
@@ -17,22 +41,27 @@ export const Formulario_estudiante = () => {
     const [apellido, setApellido] = useState("");
     const [numIdentificacion, setNumidentificacion] = useState(0);
     const [correo, setCorreo] = useState("");
+    const [idmongo, setidmongo] = useState("");
     const [programaAcademico, setProgramaAcademico] = useState("");
     const [form, setForm] = useState();
     const [listaestudiantes, setListaEstudiantes] = useState();
     const [controlador, setControlador] = useState(false);
+    const [modal, setModal] = useState(false);
+
 
 
     useEffect(() => {
         Axios.get('http://localhost:8000/api/students').then((response) => {
 
-            console.log(response.data)
+           // console.log(response.data)
             setListaEstudiantes(response.data)
         })
 
         setControlador(false)
 
     }, [controlador])
+
+
 
     const eliminar = (id) => {
         try {
@@ -43,13 +72,15 @@ export const Formulario_estudiante = () => {
         }
     };
 
+    const handleModal = () => { setModal(!modal) }
+
 
     const addestudiante = (e) => {
 
         e.preventDefault()
 
 
-        console.log(datosForm);
+       // console.log(datosForm);
         const { nombre, apellido, numIdentificacion, correo, programaAcademico } = e.target
         if (!nombre.value.trim()) {
             alert("Digite los nombres");
@@ -76,15 +107,64 @@ export const Formulario_estudiante = () => {
             correo: correo.value,
             programaAcademico: programaAcademico.value
         })
-        console.log(respuesta)
+        //console.log(respuesta)
         setForm(respuesta)
         setControlador(true)
 
-        
+
         setDatosForm({
             nombre: "",
             apellido: "",
-            numIdentificacion: 0,
+            numIdentificacion: "",
+            correo: '',
+            programaAcademico: ""
+        });
+    }
+
+    const cambiarestudiante = (e,id) => {
+        console.log('id',id)
+
+        e.preventDefault()
+
+
+        const { nombre, apellido, numIdentificacion, correo, programaAcademico } = e.target
+        console.log(nombre.value)
+        
+        if (!nombre.value.trim()) {
+            alert("Digite los nombres");
+            return;
+        } else if (!apellido.value.trim()) {
+            alert("Digite el apellido");
+            return;
+        }
+        if (!numIdentificacion.value < 0) {
+            alert("La identificacion no pueden ser negativo");
+            return;
+        } else if (!correo.value.trim()) {
+            alert("Digite el correo");
+            return;
+        }
+        if (!programaAcademico.value.trim()) {
+            alert("Digite el programa academico");
+            return;
+        }
+        const respuesta = Axios.put(`http://localhost:8000/api/students/${id}`, {
+            nombre: nombre.value,
+            apellido: apellido.value,
+            numIdentificacion: numIdentificacion.value,
+            correo: correo.value,
+            programaAcademico: programaAcademico.value
+        })
+        console.log(respuesta)
+        setForm(respuesta)
+        console.log(form)
+        setControlador(true)
+
+
+        setDatosForm({
+            nombre: "",
+            apellido: "",
+            numIdentificacion: "",
             correo: '',
             programaAcademico: ""
         });
@@ -93,11 +173,26 @@ export const Formulario_estudiante = () => {
       setApellido("");
       setCorreo("");
       setProgramaAcademico("");*/
-
+      const todos=(item)=>{
+          editar(item)
+          handleModal()
+      }
+      const editar = (item) => {
+        
+            setNombre(item.nombre);
+            setApellido(item.apellido);
+            setNumidentificacion(item.numIdentificacion);
+            setCorreo(item.correo);
+            setProgramaAcademico(item.programaAcademico);
+            setidmongo(item._id);
+            console.log('idmongo',idmongo)            
+         
+        
+      };
 
     return (
-        <React.StrictMode>
-            <NavBar/>
+        <>
+            <NavBar />
             <div className="container mt-4">
                 <div>
                     <h1 className="text-center font-italic">
@@ -114,7 +209,7 @@ export const Formulario_estudiante = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 name='nombre'
                                 placeholder="Ingrese nombre"
                                 value={datosForm.nombre}
@@ -125,7 +220,7 @@ export const Formulario_estudiante = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 placeholder="Ingrese apellido"
                                 name='apellido'
                                 value={datosForm.apellido}
@@ -136,7 +231,7 @@ export const Formulario_estudiante = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 placeholder="Ingrese identificacion"
                                 name='numIdentificacion'
                                 value={datosForm.numIdentificacion}
@@ -147,7 +242,7 @@ export const Formulario_estudiante = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 placeholder="Ingrese correo"
                                 name='correo'
                                 value={datosForm.correo}
@@ -158,7 +253,7 @@ export const Formulario_estudiante = () => {
                             <input
                                 onChange={handleChange}
                                 className="form-control mb-2 "
-                                type="String"
+                                type="text"
                                 placeholder="Ingrese programa academico"
                                 name='programaAcademico'
                                 value={datosForm.programaAcademico}
@@ -199,28 +294,117 @@ export const Formulario_estudiante = () => {
                                                 </td>
                                                 <td>
                                                     <button
-                                                        className="btn btn-warning btn-sm float-end "
+                                                        className="btn btn-warning btn-sm float-end " onClick={() => todos(item)}
                                                     >
                                                         Editar
                                                     </button>
                                                 </td>
                                             </tr>
+
+
+
+
                                         ))}
                                     </tbody>
+
                                 </table>
+
+
+
+
                             </div>
 
                         </div>
                     </div>
                 </div>
+
             </div>
 
+            {
+
+                modal && (listaestudiantes.map(estudiante=>(
+                    
+                    <div key={estudiante._id}className="modal" tabIndex="-1" style={{ display: 'block' }}>
+                        
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Modal title</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleModal}></button>
+                        </div>
+                        <div className="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <form onSubmit={(e)=>cambiarestudiante(e,idmongo)} >
+                            <h6 className="card-subtitle mb-2 text-muted">
+                                Nombre del estudiante
+                            </h6>
+                            <input
+                                
+                                className="form-control mb-2 "
+                                type="text"
+                                name='nombre'
+                                placeholder="Ingrese nombre"
+                                defaultValue={nombre}
+                            />
+                            <h6 className="card-subtitle mb-2 text-muted">
+                                Apellido del estudiante
+                            </h6>
+                            <input
+                                
+                                className="form-control mb-2 "
+                                type="text"
+                                placeholder="Ingrese apellido"
+                                name='apellido'
+                                defaultValue={apellido}
+                            />
+                            <h6 className="card-subtitle mb-2 text-muted">
+                                Numero de id del estudiante
+                            </h6>
+                            <input
+                                className="form-control mb-2 "
+                                type="text"
+                                placeholder="Ingrese identificacion"
+                                name='numIdentificacion'
+                                defaultValue={numIdentificacion}
+                            />
+                            <h6 className="card-subtitle mb-2 text-muted">
+                                correo del estudiante
+                            </h6>
+                            <input
+                                className="form-control mb-2 "
+                                type="text"
+                                placeholder="Ingrese correo"
+                                name='correo'
+                                defaultValue={correo}
+                            />
+                            <h6 className="card-subtitle mb-2 text-muted">
+                                Programa academico del estudiante
+                            </h6>
+                            <input
+                                className="form-control mb-2 "
+                                type="text"
+                                placeholder="Ingrese programa academico"
+                                name='programaAcademico'
+                                defaultValue={programaAcademico}
+                            />
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"onClick={handleModal}>Close</button>
+                            <button type="submit" className="btn btn-primary" >Save changes</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+                ))
+                
+    )
+                }
 
 
 
 
-
-        </React.StrictMode >
+        </ >
     )
 
 }

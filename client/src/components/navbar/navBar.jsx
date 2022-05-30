@@ -27,13 +27,23 @@ export const NavBar = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" href="/api/students">
+                            <a className="nav-link active" href="/students">
                                 Registro estudiantes
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" href="/api/teachers">
+                            <a className="nav-link active" href="/teachers">
                                 Lista profesores
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/subjects">
+                                Registro de asignatura
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/classes">
+                                Registro de clases
                             </a>
                         </li>
 

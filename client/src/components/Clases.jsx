@@ -67,12 +67,12 @@ export const Clases = () => {
     }
 
 
-    const eliminarClases = async(id) => {
+    const eliminarClases = async (id) => {
         try {
-           await fetch(`http://localhost:8000/api/classes/${id}`,{
-            method: 'DELETE'
-           })
-            
+            await fetch(`http://localhost:8000/api/classes/${id}`, {
+                method: 'DELETE'
+            })
+
         } catch (error) {
             console.log(error);
         }
@@ -143,7 +143,7 @@ export const Clases = () => {
                                         </thead>
                                         <tbody>
                                             {listaClases?.map((item, index) => (
-                                                <tr key={index}>                                                    
+                                                <tr key={index}>
                                                     <td>{devolverEstudiante(item.id_estudiante).nombre}</td>
                                                     <td>{devolverAsignatura(item.id_asignatura).nombre}</td>
 
