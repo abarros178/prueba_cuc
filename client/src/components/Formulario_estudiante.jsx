@@ -9,6 +9,8 @@ export const Formulario_estudiante = () => {
     const [programaAcademico, setProgramaAcademico] = useState("");
     const [form, setForm] = useState();
     const [listaestudiantes, setListaEstudiantes] = useState();
+    const [controlador, setControlador] = useState(false);
+
 
     useEffect(() => {
         Axios.get('http://localhost:8000/api/students').then((response) => {
@@ -17,11 +19,14 @@ export const Formulario_estudiante = () => {
             setListaEstudiantes(response.data)
         })
 
-    }, [form])
+        setControlador(false)
+
+    }, [controlador])
 
     const eliminar = (id) => {
         try {
             Axios.delete(`http://localhost:8000/api/students/${id}`)
+            setControlador(true)
         } catch (error) {
             console.log(error);
         }
