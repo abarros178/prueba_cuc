@@ -3,7 +3,7 @@ import Axios from 'axios';
 import NavBar from './navbar/navBar.jsx'
 
 
-export const Formulario_estudiante = () => {
+export const Estudiante = () => {
     const [datosForm, setDatosForm] = React.useState({
         nombre: "",
         apellido: "",

@@ -1,4 +1,3 @@
-import { Axios } from 'axios';
 import React, { useState, useEffect } from 'react'
 import NavBar from './navbar/navBar';
 
@@ -27,7 +26,6 @@ export const Asignaturas = () => {
     const [nombre, setNombre] = useState("")
     const [salon, setSalon] = useState("")
     const [horario, setHorario] = useState("")
-    const [id_profesor, setIdprofesor] = useState("")
     const [modal, setModal] = useState(false);
     const [idmongo, setidmongo] = useState("");
 
@@ -150,7 +148,7 @@ export const Asignaturas = () => {
         setNombre(item.nombre);
         setHorario(item.horario);
         setSalon(item.salon);
-        setIdprofesor(item.id_profesor);
+        
         setDatosFormedit(item)
         setidmongo(item._id)
 
