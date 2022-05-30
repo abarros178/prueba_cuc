@@ -70,7 +70,7 @@ export const Asignaturas = () => {
 
 
 
-        await fetch('http://localhost:8000/api/subjects', {
+        await fetch('https://andresbarros.herokuapp.com/api/subjects', {
             method: 'POST',
             body: JSON.stringify(datosForm),
             headers: { "Content-Type": 'application/json' }
@@ -111,7 +111,7 @@ export const Asignaturas = () => {
             alert("Seleccione el profesor");
             return;
         }
-        /* const respuesta = Axios.put(`http://localhost:8000/api/subjects/${id}`, {
+        /* const respuesta = Axios.put(`https://andresbarros.herokuapp.com/api/subjects/${id}`, {
             nombre: nombre.value,
             salon: salon.value,
             horario: horario.value,
@@ -119,7 +119,7 @@ export const Asignaturas = () => {
         })
         console.log(respuesta) */
 
-        const response = await fetch(`http://localhost:8000/api/subjects/${id}`, {
+        const response = await fetch(`https://andresbarros.herokuapp.com/api/subjects/${id}`, {
             method: 'PUT',
             body: JSON.stringify(datosFormedit),
             headers: {
@@ -163,7 +163,7 @@ export const Asignaturas = () => {
     const eliminarAsignatura = async (id) => {
         try {
 
-            const response = await fetch('http://localhost:8000/api/classes');
+            const response = await fetch('https://andresbarros.herokuapp.com/api/classes');
             const data = await response.json();
             console.log(data)
             const existe=data.find(item=>item.id_asignatura===id)
@@ -172,7 +172,7 @@ export const Asignaturas = () => {
                 return
             }
 
-            await fetch(`http://localhost:8000/api/subjects/${id}`, {
+            await fetch(`https://andresbarros.herokuapp.com/api/subjects/${id}`, {
                 method: 'DELETE'
             })
 
@@ -183,13 +183,13 @@ export const Asignaturas = () => {
     };
 
     const loadTecher = async () => {
-        const response = await fetch('http://localhost:8000/api/teachers');
+        const response = await fetch('https://andresbarros.herokuapp.com/api/teachers');
         const data = await response.json();
 
         setListaProfesores(data)
     }
     const loadAsignatura = async () => {
-        const response = await fetch('http://localhost:8000/api/subjects');
+        const response = await fetch('https://andresbarros.herokuapp.com/api/subjects');
         const data = await response.json();
 
         setListaasignaturas(data)

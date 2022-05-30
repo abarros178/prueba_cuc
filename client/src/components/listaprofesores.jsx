@@ -1,4 +1,3 @@
-import { Axios } from 'axios';
 import React, { useState, useEffect } from 'react'
 import NavBar from './navbar/navBar';
 
@@ -6,14 +5,14 @@ export const Listaprofesores = () => {
     const [listaProfesores, setListaProfesores] = useState([]);
 
     const loadTecher = async () => {
-        const response = await fetch('http://localhost:8000/api/teachers');
+        const response = await fetch('https://andresbarros.herokuapp.com/api/teachers');
         const data = await response.json();
         console.log(data);
         setListaProfesores(data)
     }
 
     useEffect(() => {
-        /* Axios.get('http://localhost:8000/api/teachers').then((response) => {
+        /* Axios.get('https://andresbarros.herokuapp.com/api/teachers').then((response) => {
 
             console.log(response.data)
             setListaProfesores(response.data)

@@ -26,7 +26,7 @@ export const Clases = () => {
             return;
         }
 
-        await fetch('http://localhost:8000/api/classes', {
+        await fetch('https://andresbarros.herokuapp.com/api/classes', {
             method: 'POST',
             body: JSON.stringify(datosForm),
             headers: { "Content-Type": 'application/json' }
@@ -41,20 +41,20 @@ export const Clases = () => {
     }
 
     const loadAsignatura = async () => {
-        const response = await fetch('http://localhost:8000/api/subjects');
+        const response = await fetch('https://andresbarros.herokuapp.com/api/subjects');
         const data = await response.json();
 
         setListaasignaturas(data)
     }
     const loadEstudiante = async () => {
-        const response = await fetch('http://localhost:8000/api/students');
+        const response = await fetch('https://andresbarros.herokuapp.com/api/students');
         const data = await response.json();
 
         setListaEstudiantes(data)
 
     }
     const loadclases = async () => {
-        const response = await fetch('http://localhost:8000/api/classes');
+        const response = await fetch('https://andresbarros.herokuapp.com/api/classes');
         const data = await response.json();
         setListaClases(data)
         console.log(data)
@@ -73,7 +73,7 @@ export const Clases = () => {
 
     const eliminarClases = async (id) => {
         try {
-            await fetch(`http://localhost:8000/api/classes/${id}`, {
+            await fetch(`https://andresbarros.herokuapp.com/api/classes/${id}`, {
                 method: 'DELETE'
             })
 

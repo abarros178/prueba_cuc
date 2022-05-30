@@ -2,28 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 import NavBar from './navbar/navBar.jsx'
 
-const Modelo = () => {
-    return (
-        <div className="modal" tabIndex="-1" style={{ display: 'block' }}>
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title">Editar estudiantes</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                        <p>Aqui puedes editar el estudiante</p>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    )
-}
 
 export const Formulario_estudiante = () => {
     const [datosForm, setDatosForm] = React.useState({
@@ -51,7 +29,7 @@ export const Formulario_estudiante = () => {
 
 
     useEffect(() => {
-        Axios.get('http://localhost:8000/api/students').then((response) => {
+        Axios.get('https://andresbarros.herokuapp.com/api/students').then((response) => {
 
             // console.log(response.data)
             setListaEstudiantes(response.data)
@@ -69,7 +47,7 @@ export const Formulario_estudiante = () => {
         try {
             
 
-            const response = await fetch('http://localhost:8000/api/classes');
+            const response = await fetch('https://andresbarros.herokuapp.com/api/classes');
             const data = await response.json();
             console.log(data)
             const existe=data.find(item=>item.id_estudiante===id)
@@ -77,7 +55,7 @@ export const Formulario_estudiante = () => {
                 alert('No se puede eliminar un estudiante asignado a una clase')
                 return
             }
-            Axios.delete(`http://localhost:8000/api/students/${id}`)
+            Axios.delete(`https://andresbarros.herokuapp.com/api/students/${id}`)
             setControlador(true)
         } catch (error) {
             console.log(error);
@@ -115,7 +93,7 @@ export const Formulario_estudiante = () => {
             alert("Digite el programa academico");
             return;
         }
-        const respuesta = Axios.post('http://localhost:8000/api/students', {
+        const respuesta = Axios.post('https://andresbarros.herokuapp.com/api/students', {
             nombre: nombre.value,
             apellido: apellido.value,
             numIdentificacion: numIdentificacion.value,
@@ -163,7 +141,7 @@ export const Formulario_estudiante = () => {
             alert("Digite el programa academico");
             return;
         }
-        const respuesta = Axios.put(`http://localhost:8000/api/students/${id}`, {
+        const respuesta = Axios.put(`https://andresbarros.herokuapp.com/api/students/${id}`, {
             nombre: nombre.value,
             apellido: apellido.value,
             numIdentificacion: numIdentificacion.value,
